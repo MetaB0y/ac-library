@@ -4,6 +4,7 @@
 #include <cassert>
 #include <numeric>
 #include <type_traits>
+#include <iosfwd>
 
 #ifdef _MSC_VER
 #include <intrin.h>
@@ -131,6 +132,10 @@ struct static_modint : internal::static_modint_base {
     friend bool operator!=(const mint& lhs, const mint& rhs) {
         return lhs._v != rhs._v;
     }
+    
+    friend std::ostream& operator<<(std::ostream& os, const mint& myself) {
+        return os << myself.val();
+    }
 
   private:
     unsigned int _v;
@@ -240,6 +245,10 @@ template <int id> struct dynamic_modint : internal::modint_base {
     }
     friend bool operator!=(const mint& lhs, const mint& rhs) {
         return lhs._v != rhs._v;
+    }
+    
+    friend std::ostream& operator<<(std::ostream& os, const mint& myself) {
+        return os << myself.val();
     }
 
   private:
